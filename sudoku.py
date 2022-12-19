@@ -65,7 +65,30 @@ def getTile(index,matrix):
 def checkRules(index,num,matrix):
     return (num not in getRow(index,matrix)) and (num not in getCol(index,matrix)) and (num not in getTile(index,matrix))
 
+def isSolved(matrix):
+    for i in range(N):
+        for j in range(M):
+            if matrix[i][j] == 0:
+                return False
+    return True
+
+
+def solve(index,matrix,origin_matrix):
+    if isSolved(matrix):
+        return matrix
+#     print_2dlist(matrix)
+    i = index // M
+    j = index % M
+    if origin_matrix[i][j] == 0:
+        for num in range(1,9+1):
+            if checkRules(index,num,matrix):
+                matrix[i][j] = num
+                matrix = solve(index+1,matrix,origin_matrix)
+    else:
+        matrix = solve(index+1,matrix,origin_matrix)
 
 filename = 'sudoku-task0.txt'
-matrix = readSudoku(filename)
-printSudoku(matrix)
+origin_matrix = readSudoku(filename)
+matrix = copy.deepcopy(origin_matrix)
+matrix_res = solve(0,matrix,origin_matrix)
+printSudoku(matrix_res)
