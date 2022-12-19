@@ -62,6 +62,9 @@ def getTile(index,matrix):
             res.append(matrix[i][j])
     return res
 
+def checkRules(index,num,matrix):
+    return (num not in getRow(index,matrix)) and (num not in getCol(index,matrix)) and (num not in getTile(index,matrix))
+
 
 filename = 'sudoku-task0.txt'
 matrix = readSudoku(filename)
