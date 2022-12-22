@@ -76,7 +76,9 @@ def isSolved(matrix):
 def solve(index,matrix,origin_matrix):
     if isSolved(matrix):
         return matrix
-#     print_2dlist(matrix)
+    # print('-'*50)
+    # printSudoku(matrix)
+    # print('-'*50)
     i = index // M
     j = index % M
     if origin_matrix[i][j] == 0:
